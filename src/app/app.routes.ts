@@ -3,6 +3,7 @@ import { LoginComponent } from './pages/login/login';
 import { HabitsComponent } from './pages/habits/habits';
 import { GoalsComponent } from './pages/goals/goals';
 import { authGuard } from './guards/auth-guard';
+import { TasksComponent } from './pages/tasks/tasks';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,5 +23,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () => import('./pages/goals/goals')
       .then(m => m.GoalsComponent)
+  },
+  {
+    path: 'tasks',
+    canActivate: [authGuard],
+    loadComponent: () => import('./pages/tasks/tasks')
+      .then(m => m.TasksComponent)
   }
 ];
