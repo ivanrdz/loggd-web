@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SocialAuthService, GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 export interface User {
   id: string;
@@ -15,15 +16,33 @@ export interface User {
 export class AuthService {
   private apiUrl = 'https://loggd-backend-production.up.railway.app/api';
 
-  // Signal — estado reactivo del usuario actual
   currentUser = signal<User | null>(null);
   isLoggedIn = signal(false);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private socialAuth: SocialAuthService
+  ) {
     this.loadFromStorage();
   }
 
-  // Login de desarrollo (mientras conectamos Google)
+  // Login real con Google
+  loginWithGoogle() {
+    this.socialAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(user => {
+      this.http.post<{ accessToken: string; user: User }>(
+        `${this.apiUrl}/Auth/google`,
+        { idToken: user.idToken }
+      ).subscribe(response => {
+        localStorage.setItem('token', response.accessToken);
+        this.currentUser.set(response.user);
+        this.isLoggedIn.set(true);
+        this.router.navigate(['/habits']);
+      });
+    });
+  }
+
+  // Login de desarrollo
   devLogin() {
     return this.http.post<{ accessToken: string; userId: string }>(
       `${this.apiUrl}/Auth/dev-login`, {}
