@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login';
 import { HabitsComponent } from './pages/habits/habits';
 import { GoalsComponent } from './pages/goals/goals';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -12,11 +13,13 @@ export const routes: Routes = [
   },
   {
     path: 'habits',
+    canActivate: [authGuard],
     loadComponent: () => import('./pages/habits/habits')
       .then(m => m.HabitsComponent)
   },
   {
     path: 'goals',
+    canActivate: [authGuard],
     loadComponent: () => import('./pages/goals/goals')
       .then(m => m.GoalsComponent)
   }
