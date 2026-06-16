@@ -59,10 +59,11 @@ import { AuthService } from '../../services/auth';
     .user-info { display: flex; align-items: center; gap: 10px; padding: 12px; background: #1a1a2e; border-radius: 10px; margin-top: auto; }
     .avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
     .avatar-placeholder { width: 36px; height: 36px; border-radius: 50%; background: #6366f1; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem; flex-shrink: 0; }
-    .user-name { font-size: 0.85rem; font-weight: 500; color: #e2e2e2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-name { font-size: 0.85rem; font-weight: 500; color: #e2e2e2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
     .user-level { font-size: 0.75rem; color: #555; }
     .btn-logout { background: transparent; border: 1px solid #1e1e32; color: #666; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
     .btn-logout:hover { color: #e2e2e2; border-color: #444; }
+    .user-info { display: flex; align-items: center; gap: 10px; padding: 12px; background: #1a1a2e; border-radius: 10px; margin-top: auto; overflow: hidden; }
   `]
 })
 export class LayoutComponent {

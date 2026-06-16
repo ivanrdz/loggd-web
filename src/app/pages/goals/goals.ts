@@ -84,16 +84,22 @@ import { Goal, GoalsService } from '../../services/goals';
             </div>
 
             <!-- Log progress -->
-            <div class="log-row">
-              <input
-                class="input small"
-                type="number"
-                placeholder="Log progress..."
-                [(ngModel)]="progressInputs[goal.id]" />
-              <button class="btn-log" (click)="logProgress(goal)">
-                Update
-              </button>
-            </div>
+            @if (!isCompleted(goal)) {
+              <div class="log-row">
+                <input
+                  class="input small"
+                  type="number"
+                  placeholder="Log progress..."
+                  [(ngModel)]="progressInputs[goal.id]" />
+                <button class="btn-log" (click)="logProgress(goal)">
+                  Update
+                </button>
+              </div>
+            } @else {
+              <div class="completed-banner">
+                🎉 ¡Meta alcanzada! 🌟⭐🌟
+              </div>
+            }
           </div>
         }
       </div>
@@ -133,6 +139,11 @@ import { Goal, GoalsService } from '../../services/goals';
     .btn-log { background: #1a1a2e; border: 1px solid #2e2e4e; color: #e2e2e2; padding: 8px 16px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
     .btn-log:hover { border-color: #6366f1; color: #6366f1; }
     .loading { color: #666; padding: 2rem; text-align: center; }
+    .completed-banner { text-align: center; padding: 10px; background: #1a2d1a; border: 1px solid #22c55e; border-radius: 8px; color: #22c55e; font-weight: 600; font-size: 0.95rem; animation: pulse 1.5s ease-in-out infinite; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
   `]
 })
 export class GoalsComponent implements OnInit {
@@ -200,5 +211,10 @@ export class GoalsComponent implements OnInit {
       Career: '💼', Health: '💪', Financial: '💰', Growth: '🌱'
     };
     return icons[category] ?? '🎯';
+  }
+
+  isCompleted(goal: Goal): boolean {
+    if (!goal.targetValue) return false;
+    return (goal.currentValue ?? 0) >= goal.targetValue;
   }
 }
