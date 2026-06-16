@@ -99,7 +99,7 @@ import { ContributionGraph } from '../../components/contribution-graph/contribut
     </div>
   `,
   styles: [`
-    .container { padding: 2rem; }
+    .container { padding: 1.25rem; max-width: 100%; overflow-x: hidden; }
     .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
     .topbar h2 { font-size: 1.5rem; font-weight: 600; color: #e2e2e2; }
     .btn-primary { background: #6366f1; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.95rem; }
@@ -129,9 +129,9 @@ import { ContributionGraph } from '../../components/contribution-graph/contribut
     .stat-label { font-size: 0.72rem; color: #666; }
     .btn-checkin { border: none; color: white; padding: 8px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: opacity 0.15s; }
     .btn-checkin:hover { opacity: 0.85; }
-    .graph-wrapper { overflow-x: auto; padding-top: 4px; }
     .loading { color: #666; padding: 2rem; text-align: center; }
     .btn-checkin:disabled { opacity: 0.7; cursor: not-allowed; }
+    .graph-wrapper { overflow-x: auto; padding-top: 4px; -webkit-overflow-scrolling: touch; max-width: 100%; }
   `]
 })
 export class HabitsComponent implements OnInit {

@@ -88,19 +88,20 @@ interface AdminUser {
     .topbar h2 { font-size: 1.5rem; font-weight: 600; color: #e2e2e2; }
     .badge { background: #1a1a2e; border: 1px solid #6366f1; color: #6366f1; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
     .users-list { display: flex; flex-direction: column; gap: 1rem; }
-    .user-card { background: #0f0f1a; border: 1px solid #1e1e32; border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-    .user-left { display: flex; align-items: center; gap: 12px; }
     .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
     .avatar-placeholder { width: 48px; height: 48px; border-radius: 50%; background: #6366f1; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; color: white; flex-shrink: 0; }
-    .user-name { font-weight: 600; color: #e2e2e2; font-size: 0.95rem; }
-    .user-email { font-size: 0.82rem; color: #666; margin-top: 2px; }
-    .user-date { font-size: 0.75rem; color: #444; margin-top: 4px; }
-    .user-stats { display: flex; gap: 1.5rem; }
     .stat { display: flex; flex-direction: column; align-items: center; }
     .stat-val { font-size: 1.1rem; font-weight: 700; color: #6366f1; }
     .stat-lbl { font-size: 0.72rem; color: #555; }
     .loading { color: #666; padding: 2rem; text-align: center; }
     .forbidden { background: #2d1a1a; border: 1px solid #ef4444; color: #ef4444; padding: 1.5rem; border-radius: 12px; text-align: center; font-weight: 600; }
+    .user-card { background: #0f0f1a; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+    .user-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .user-info { min-width: 0; overflow: hidden; }
+    .user-name { font-weight: 600; color: var(--text-primary); font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-email { font-size: 0.82rem; color: var(--text-secondary); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-date { font-size: 0.75rem; color: var(--text-tertiary); margin-top: 4px; }
+    .user-stats { display: flex; gap: 1rem; flex-wrap: wrap; }
   `]
 })
 export class AdminComponent implements OnInit {

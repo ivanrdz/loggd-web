@@ -67,8 +67,8 @@ import { AuthService } from '../../services/auth';
     .avatar-section { display: flex; align-items: center; gap: 1.5rem; }
     .avatar-lg { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #6366f1; }
     .avatar-placeholder-lg { width: 80px; height: 80px; border-radius: 50%; background: #6366f1; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; color: white; flex-shrink: 0; }
-    .profile-name { font-size: 1.3rem; font-weight: 700; color: #e2e2e2; margin: 0 0 4px; }
-    .profile-email { font-size: 0.9rem; color: #666; margin: 0 0 8px; }
+    .profile-name { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin: 0 0 4px; word-break: break-word; }
+    .profile-email { font-size: 0.82rem; color: var(--text-secondary); margin: 0 0 8px; word-break: break-all; }
     .level-badge { display: inline-block; background: #1a1a2e; border: 1px solid #6366f1; color: #6366f1; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .stat-card { background: #0a0a14; border: 1px solid #1e1e32; border-radius: 12px; padding: 1.25rem; text-align: center; }
@@ -78,7 +78,7 @@ import { AuthService } from '../../services/auth';
     .info-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #1e1e32; }
     .info-row:last-child { border-bottom: none; }
     .info-label { font-size: 0.85rem; color: #666; }
-    .info-value { font-size: 0.85rem; color: #e2e2e2; }
+    .info-value { font-size: 0.82rem; color: var(--text-primary); word-break: break-all; text-align: right; max-width: 60%; }
     .info-value.id { font-family: monospace; font-size: 0.75rem; color: #555; }
   `]
 })
