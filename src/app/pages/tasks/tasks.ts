@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TasksService, TaskItem } from '../../services/tasks';
+import { TasksService, TaskItem } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -50,7 +50,6 @@ import { TasksService, TaskItem } from '../../services/tasks';
         <div class="loading">Cargando tareas...</div>
       }
 
-      <!-- Pendientes -->
       <div class="section">
         <div class="tasks-list">
           @for (task of pendingTasks(); track task.id) {
@@ -64,8 +63,8 @@ import { TasksService, TaskItem } from '../../services/tasks';
                   <div class="task-desc">{{ task.description }}</div>
                 }
                 <div class="task-meta">
-                  <span class="tag priority-{{ task.priority.toLowerCase() }}">
-                    {{ task.priority }}
+                  <span class="tag priority-{{ getPriorityClass(task.priority) }}">
+                    {{ getPriorityLabel(task.priority) }}
                   </span>
                   @if (task.tag) {
                     <span class="tag">{{ task.tag }}</span>
@@ -87,7 +86,6 @@ import { TasksService, TaskItem } from '../../services/tasks';
         </div>
       </div>
 
-      <!-- Completadas -->
       @if (showCompleted && completedTasks().length > 0) {
         <div class="section">
           <h3 class="section-title">Completadas</h3>
@@ -202,5 +200,21 @@ export class TasksComponent implements OnInit {
 
   delete(taskId: string) {
     this.tasksService.delete(taskId).subscribe(() => this.load());
+  }
+
+  getPriorityClass(priority: any): string {
+    if (typeof priority === 'number') {
+      const map: Record<number, string> = { 0: 'low', 1: 'medium', 2: 'high', 3: 'urgent' };
+      return map[priority] ?? 'medium';
+    }
+    return priority.toLowerCase();
+  }
+
+  getPriorityLabel(priority: any): string {
+    if (typeof priority === 'number') {
+      const map: Record<number, string> = { 0: 'Low', 1: 'Medium', 2: 'High', 3: 'Urgent' };
+      return map[priority] ?? 'Medium';
+    }
+    return priority;
   }
 }
