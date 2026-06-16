@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth';
   template: `
     <div class="login-container">
       <div class="login-card">
-        <div class="logo">🪵</div>
+        <img src="logo.svg" alt="Loggd" class="login-logo">
         <h1>Loggd</h1>
         <p>Track your habits, goals and tasks</p>
 
@@ -73,6 +73,7 @@ import { AuthService } from '../../services/auth';
       width: 100%;
     }
     .btn-dev:hover { border-color: #444; color: #aaa; }
+    .login-logo { width: 64px; height: 64px; border-radius: 16px; }
   `]
 })
 export class LoginComponent implements OnInit {

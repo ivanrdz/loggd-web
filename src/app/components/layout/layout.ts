@@ -25,7 +25,10 @@ import { AuthService } from '../../services/auth';
 
       <!-- Sidebar -->
       <aside class="sidebar" [class.open]="menuOpen()">
-        <div class="sidebar-logo">🪵 Loggd</div>
+        <div class="sidebar-logo">
+          <img src="logo.svg" alt="Loggd" class="logo-img">
+          <span>Loggd</span>
+        </div>
 
         <nav>
           @for (item of navItems; track item.path) {
@@ -177,12 +180,6 @@ import { AuthService } from '../../services/auth';
       height: 100vh;
       flex-shrink: 0;
     }
-    .sidebar-logo {
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 0 0.75rem;
-      color: var(--text-primary);
-    }
 
     /* ── Nav ── */
     nav {
@@ -302,6 +299,9 @@ import { AuthService } from '../../services/auth';
       .sidebar-logo { display: none; }
       .main { padding-top: 52px; }
     }
+
+    .sidebar-logo { display: flex; align-items: center; gap: 10px; padding: 0 0.5rem; font-size: 1.1rem; font-weight: 600; color: var(--text-primary); }
+    .logo-img { width: 32px; height: 32px; border-radius: 8px; }
   `]
 })
 export class LayoutComponent {
