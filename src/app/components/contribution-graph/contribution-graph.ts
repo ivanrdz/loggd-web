@@ -45,19 +45,12 @@ interface GridCell {
     </div>
   `,
   styles: [`
-    .graph-container { padding: 0.5rem 0; }
-    .months-row { display: flex; margin-bottom: 4px; padding-left: 0; }
     .month-label { font-size: 11px; color: #666; position: absolute; }
-    .grid { display: flex; gap: 3px; position: relative; margin-top: 20px; }
+    .graph-container { padding: 0.5rem 0; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .months-row { display: flex; margin-bottom: 4px; padding-left: 0; min-width: max-content; }
+    .grid { display: flex; gap: 3px; position: relative; margin-top: 20px; min-width: max-content; }
     .week { display: flex; flex-direction: column; gap: 3px; }
-    .cell {
-      width: 12px;
-      height: 12px;
-      border-radius: 2px;
-      background: #1a1a2e;
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
+    .cell { width: 12px; height: 12px; border-radius: 2px; background: #1a1a2e; cursor: pointer; transition: transform 0.1s; }
     .cell:hover { transform: scale(1.3); }
     .legend { display: flex; align-items: center; gap: 4px; margin-top: 8px; }
     .legend span { font-size: 11px; color: #666; }

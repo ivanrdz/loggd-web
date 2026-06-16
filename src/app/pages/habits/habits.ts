@@ -116,7 +116,7 @@ import { ContributionGraph } from '../../components/contribution-graph/contribut
     .emoji-opt.selected { border-color: #6366f1; background: #1a1a2e; }
     .form-actions { display: flex; gap: 8px; justify-content: flex-end; }
     .habits-list { display: flex; flex-direction: column; gap: 1rem; }
-    .habit-card { background: #0f0f1a; border: 1px solid #1e1e32; border-radius: 14px; padding: 1.25rem 1.5rem; transition: border-color 0.15s; }
+    .habit-card { background: #0f0f1a; border: 1px solid #1e1e32; border-radius: 14px; padding: 1.25rem 1.5rem; transition: border-color 0.15s; overflow: hidden; }
     .habit-card:hover { border-color: #2e2e4e; }
     .habit-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
     .habit-left { display: flex; align-items: center; gap: 12px; }
@@ -131,7 +131,7 @@ import { ContributionGraph } from '../../components/contribution-graph/contribut
     .btn-checkin:hover { opacity: 0.85; }
     .loading { color: #666; padding: 2rem; text-align: center; }
     .btn-checkin:disabled { opacity: 0.7; cursor: not-allowed; }
-    .graph-wrapper { overflow-x: auto; padding-top: 4px; -webkit-overflow-scrolling: touch; max-width: 100%; }
+    .graph-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-top: 4px; margin: 0 -1.5rem; padding: 4px 1.5rem 0; }
   `]
 })
 export class HabitsComponent implements OnInit {
