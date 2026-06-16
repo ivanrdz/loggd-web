@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TasksService, TaskItem } from '../../services/tasks.service';
+import { TasksService, TaskItem } from '../../services/tasks';
 
 @Component({
   selector: 'app-tasks',
