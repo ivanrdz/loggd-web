@@ -76,8 +76,14 @@ import { ContributionGraph } from '../../components/contribution-graph/contribut
                   <span class="stat-value">{{ habit.totalCompletions }}</span>
                   <span class="stat-label">✅ total</span>
                 </div>
-                <button class="btn-checkin" [style.background]="habit.color" (click)="checkIn(habit.id)">
-                  Check in
+                <button
+                  class="btn-checkin"
+                  [style.background]="hasCheckedInToday(habit) ? '#1a1a2e' : habit.color"
+                  [style.border]="hasCheckedInToday(habit) ? '1px solid ' + habit.color : 'none'"
+                  [style.color]="hasCheckedInToday(habit) ? habit.color : 'white'"
+                  [disabled]="hasCheckedInToday(habit)"
+                  (click)="checkIn(habit.id)">
+                  {{ hasCheckedInToday(habit) ? '✅ Done' : 'Check in' }}
                 </button>
               </div>
             </div>
@@ -125,6 +131,7 @@ import { ContributionGraph } from '../../components/contribution-graph/contribut
     .btn-checkin:hover { opacity: 0.85; }
     .graph-wrapper { overflow-x: auto; padding-top: 4px; }
     .loading { color: #666; padding: 2rem; text-align: center; }
+    .btn-checkin:disabled { opacity: 0.7; cursor: not-allowed; }
   `]
 })
 export class HabitsComponent implements OnInit {
@@ -171,5 +178,10 @@ export class HabitsComponent implements OnInit {
 
   getContributions(habit: Habit) {
     return habit.logs.map(l => ({ date: l.date, count: l.count }));
+  }
+
+  hasCheckedInToday(habit: Habit): boolean {
+    const today = new Date().toISOString().split('T')[0];
+    return habit.logs.some(l => l.date.startsWith(today));
   }
 }
