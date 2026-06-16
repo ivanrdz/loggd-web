@@ -6,6 +6,7 @@ import { authGuard } from './guards/auth-guard';
 import { TasksComponent } from './pages/tasks/tasks';
 import { LayoutComponent } from './components/layout/layout';
 import { ProfileComponent } from './pages/profile/profile'
+import { AdminComponent } from './pages/admin/admin'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'habits', pathMatch: 'full' },
@@ -39,6 +40,11 @@ export const routes: Routes = [
           path: 'profile',
           loadComponent: () => import('./pages/profile/profile')
             .then(m => m.ProfileComponent)
+        },
+        {
+          path: 'admin',
+          loadComponent: () => import('./pages/admin/admin')
+            .then(m => m.AdminComponent)
         }
       ]
   }

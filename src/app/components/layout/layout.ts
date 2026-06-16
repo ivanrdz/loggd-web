@@ -24,6 +24,11 @@ import { AuthService } from '../../services/auth';
           <a class="nav-item" routerLink="/profile" routerLinkActive="active">
             <span>👤</span> Mi Perfil
           </a>
+          @if (isAdmin()) {
+            <a class="nav-item admin" routerLink="/admin" routerLinkActive="active">
+              <span>🛡</span> Admin
+            </a>
+          }
         </nav>
 
         @if (user()) {
@@ -58,6 +63,7 @@ import { AuthService } from '../../services/auth';
     .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; color: #666; cursor: pointer; font-size: 0.95rem; transition: all 0.15s; text-decoration: none; }
     .nav-item:hover { background: #1a1a2e; color: #e2e2e2; }
     .nav-item.active { background: #1a1a2e; color: #e2e2e2; }
+    .nav-item.admin { color: #6366f1; }
     .main { flex: 1; overflow-y: auto; }
     .user-info { display: flex; align-items: center; gap: 10px; padding: 12px; background: #1a1a2e; border-radius: 10px; margin-top: auto; }
     .avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
@@ -71,6 +77,7 @@ import { AuthService } from '../../services/auth';
 })
 export class LayoutComponent {
   user: any;
+  isAdmin = () => this.auth.currentUser()?.email === 'ivan.rodriguez.jaramillo@gmail.com';
 
   constructor(private auth: AuthService) {
     this.user = this.auth.currentUser;
