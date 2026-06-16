@@ -21,6 +21,9 @@ import { AuthService } from '../../services/auth';
           <a class="nav-item" routerLink="/tasks" routerLinkActive="active">
             <span>✅</span> Tasks
           </a>
+          <a class="nav-item" routerLink="/profile" routerLinkActive="active">
+            <span>👤</span> Mi Perfil
+          </a>
         </nav>
 
         @if (user()) {
