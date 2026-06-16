@@ -13,22 +13,39 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   template: `
     <div class="layout">
 
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div class="logo">🪵 Loggd</div>
-        <nav>
-          <a routerLink="/habits" routerLinkActive="active" class="nav-item active">
-            <span>⚡</span> Habits
-          </a>
-          <a routerLink="/goals" routerLinkActive="active" class="nav-item">
-            <span>🎯</span> Goals
-          </a>
-          <a routerLink="/tasks" routerLinkActive="active" class="nav-item">
-            <span>✅</span> Tasks
-          </a>
-        </nav>
-        <button class="btn-logout" (click)="logout()">← Salir</button>
-      </aside>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">🪵 Loggd</div>
+    <nav>
+      <a class="nav-item" routerLink="/habits" routerLinkActive="active">
+        <span>⚡</span> Habits
+      </a>
+      <a class="nav-item" routerLink="/goals" routerLinkActive="active">
+        <span>🎯</span> Goals
+      </a>
+      <a class="nav-item" routerLink="/tasks" routerLinkActive="active">
+        <span>✅</span> Tasks
+      </a>
+    </nav>
+
+    @if (user()) {
+      <div class="user-info">
+        @if (user()?.avatarUrl) {
+          <img [src]="user()?.avatarUrl" class="avatar" alt="avatar">
+        } @else {
+          <div class="avatar-placeholder">
+            {{ user()?.name?.charAt(0) }}
+          </div>
+        }
+        <div class="user-details">
+          <div class="user-name">{{ user()?.name }}</div>
+          <div class="user-level">Nivel {{ user()?.level }}</div>
+        </div>
+      </div>
+    }
+
+    <button class="btn-logout" (click)="logout()">← Salir</button>
+  </aside>
 
       <!-- Main -->
       <main class="main">
@@ -294,6 +311,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     }
 
     .loading { color: #666; padding: 2rem; text-align: center; }
+
+    .user-info { display: flex; align-items: center; gap: 10px; padding: 12px; background: #1a1a2e; border-radius: 10px; margin-top: auto; }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+    .avatar-placeholder { width: 36px; height: 36px; border-radius: 50%; background: #6366f1; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem; flex-shrink: 0; }
+    .user-name { font-size: 0.85rem; font-weight: 500; color: #e2e2e2; }
+    .user-level { font-size: 0.75rem; color: #555; }
   `]
 })
 export class HabitsComponent implements OnInit {
@@ -306,11 +329,14 @@ export class HabitsComponent implements OnInit {
   selectedEmoji = '⭐';
   colors = ['#6366f1', '#ef4444', '#22c55e', '#f59e0b', '#3b82f6', '#ec4899', '#8b5cf6', '#14b8a6'];
   emojis = ['⭐', '💪', '📚', '🧘', '🏃', '💧', '🎯', '🌱', '✍️', '🎨'];
+  user = signal<any>(null);
 
   constructor(
     private habitsService: HabitsService,
     private auth: AuthService
-  ) {}
+  ) {
+    this.user = this.auth.currentUser;
+  }
 
   ngOnInit() { this.load(); }
 

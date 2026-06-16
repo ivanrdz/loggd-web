@@ -44,6 +44,7 @@ export class AuthService {
       { idToken: response.credential }
     ).subscribe(result => {
       localStorage.setItem('token', result.accessToken);
+      localStorage.setItem('user', JSON.stringify(result.user));
       this.currentUser.set(result.user);
       this.isLoggedIn.set(true);
       this.router.navigate(['/habits']);
@@ -62,6 +63,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.currentUser.set(null);
     this.isLoggedIn.set(false);
     this.router.navigate(['/login']);
@@ -73,6 +75,12 @@ export class AuthService {
 
   private loadFromStorage() {
     const token = this.getToken();
-    if (token) this.isLoggedIn.set(true);
+    const userStr = localStorage.getItem('user');
+    if (token) {
+      this.isLoggedIn.set(true);
+      if (userStr) {
+        this.currentUser.set(JSON.parse(userStr));
+      }
+    }
   }
 }
